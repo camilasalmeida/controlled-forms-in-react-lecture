@@ -2,20 +2,27 @@
 import { useState } from "react";
 
 const App = () => {
-
   const [title, setTitle] = useState("The full name will appear right here!!!");
   const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+  });
 
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-    console.log(firstName)
+  // const handleFirstNameChange = (event) => {
+  //   setFirstName(event.target.value);
+  //   console.log(firstName)
+  // };
+
+  // const handleLastNameChange = (event) => {
+  //   setLastName(event.target.value);
+  //   console.log(lastName)
+  // }
+
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
-    console.log(lastName)
-  }
+  console.log(formData);
 
   //-----------------------------------------------------------------------------------------\\
   return (
@@ -25,15 +32,17 @@ const App = () => {
         <label htmlFor="firstName">First name: </label>
         <input
           id="firstName"
-          value={firstName}
-          onChange={handleFirstNameChange}
+          name="firstName"
+          value={formData.firstName}
+          onChange={handleChange}
         />
         <br />
         <label htmlFor="lastName">Last name:</label>
-        <input 
-        id="lastName" 
-        value={lastName}
-        onChange={handleLastNameChange}
+        <input
+          id="lastName"
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleChange}
         />
       </form>
     </>
@@ -41,8 +50,6 @@ const App = () => {
 };
 
 export default App;
-
-
 
 /*
 - Make a simple input
