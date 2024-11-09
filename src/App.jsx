@@ -2,33 +2,30 @@
 import { useState } from "react";
 
 const App = () => {
-  const [title, setTitle] = useState("The full name will appear right here!!!");
-  const [firstName, setFirstName] = useState("");
+  const [title, setTitle] = useState('The full name will appear right here!!!');
+  const [firstName, setFirstName] = useState('');
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    firstName: '',
+    lastName: '',
   });
-
-  // const handleFirstNameChange = (event) => {
-  //   setFirstName(event.target.value);
-  //   console.log(firstName)
-  // };
-
-  // const handleLastNameChange = (event) => {
-  //   setLastName(event.target.value);
-  //   console.log(lastName)
-  // }
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
   console.log(formData);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setTitle(`Your name is: ${formData.firstName} ${formData.lastName}`)
+    setFormData({ firstName: '', lastName: ''})
+    console.log('We no longer navigate away from this page');
+  }
+
   //-----------------------------------------------------------------------------------------\\
   return (
     <>
       <h2>{title}</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="firstName">First name: </label>
         <input
           id="firstName"
@@ -44,6 +41,7 @@ const App = () => {
           value={formData.lastName}
           onChange={handleChange}
         />
+        <button type="submit">Submit your name here</button>
       </form>
     </>
   );
@@ -61,3 +59,14 @@ You’ll always need some kind of state, some kind of user input element, and a 
 
 - cityInput(the state), is controlling the value of the input field. Every time the state changes, the input field updates to show the new value.
 */
+
+
+  // const handleFirstNameChange = (event) => {
+  //   setFirstName(event.target.value);
+  //   console.log(firstName)
+  // };
+
+  // const handleLastNameChange = (event) => {
+  //   setLastName(event.target.value);
+  //   console.log(lastName)
+  // }
